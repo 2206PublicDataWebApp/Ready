@@ -67,7 +67,12 @@ public class SecurityContext extends WebSecurityConfigurerAdapter{
 				.defaultSuccessUrl("/moreInfo")
 				.userInfoEndpoint()
 				.userService(principalOAuth2UserService);
-			http.headers().frameOptions().sameOrigin();
+		// 세션 최대 1개만 허용
+		http.sessionManagement()
+			.maximumSessions(1)
+			.maxSessionsPreventsLogin(true)
+			.expiredUrl("/login");
+		// 권한 없는 사용자 접근시 예외처리
 		http.exceptionHandling().accessDeniedPage("/denied");
 	}
 }

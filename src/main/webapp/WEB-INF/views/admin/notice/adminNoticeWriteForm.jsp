@@ -33,6 +33,7 @@
 		<div class="container col-lg-8">
 			<h1>공지사항 작성</h1>
 			<form method="post" action="/admin/postNotice">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input class="form-control mb-3" type="text" name="noticeTitle" placeholder="제목을 입력하세요." required width="100%">
 				<textarea width="100%" class="summernote" name="noticeContents" required></textarea>
 			<div class="mt-5" style="text-align:center">

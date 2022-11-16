@@ -398,7 +398,7 @@
 			if(principalCheck == ''){
 				$("#exampleModal").modal('show');
 			}else{
-				console.log("No Notice");
+				console.log();
 			}
 		});
 

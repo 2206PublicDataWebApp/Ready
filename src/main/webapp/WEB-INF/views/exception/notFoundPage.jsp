@@ -14,6 +14,8 @@
 <body>
 	<div class="container col-lg-8">
 		<img class="img-fruid" src="../resources/images/exception/page-not-found.png"/>
+		<h3>잘못된 경로입니다.</h3>
+		<h3>5초 후 메인 페이지로 이동합니다.</h3>
 	</div>
 </body>
 </html>

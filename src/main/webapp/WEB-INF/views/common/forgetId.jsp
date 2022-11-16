@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-
+<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 	<style>
+* { 
+	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
 		.btn-section1 > button {
 			background-color:#AA7139;
 			color : white;
@@ -44,6 +47,7 @@
 	<div class="card container col-lg-5 mt-5 p-5">
 		<form method="post" action="/forget-id">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<img src="../resources/images/READY-LOGO1.png" height="80px" style="margin: auto; display: block;">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="회원님 이름을 입력해주세요." id="userName" name="userName">
 			</div>

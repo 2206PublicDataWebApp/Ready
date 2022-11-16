@@ -27,7 +27,7 @@
 			<h2>${msg }</h2>
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr bgcolor="#AA7139" style="color:white">
 						<th><input type="checkbox" id="cbx_chkAll"></th>
 						<th>상품번호</th>
 						<th>책 제목</th>

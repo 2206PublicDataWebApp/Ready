@@ -128,7 +128,7 @@ public class UserController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute User user) {
 		String result = userService.userRegister(user);
-		return "redirect:/";
+		return "redirect:/logout";
 	}
 
 	// 아이디 중복확인

@@ -6,6 +6,7 @@
 <sec:authorize access="isAuthenticated()">
    <sec:authentication property="principal" var="principal" />
 </sec:authorize>
+<link rel="stylesheet" href="../resources/css/admin/button.css"/>
 <style>
 span.guide {
 	display: none;
@@ -63,7 +64,9 @@ span.error {
 			<label for="userBirthday">생일 </label> 
 			<input type="date" class="form-control" placeholder="Enter Nickname" id="userBirthday" name="userBirthday">
 		</div>
-		<button type="submit" class="btn btn-dark col-md-12 mt-3" id="submit">회원가입</button>
+		<div class="btn-section1">
+			<button type="submit" class="btn col-md-12 mt-3  mb-3" id="submit">회원가입</button>
+		</div>
 	</form>
 	</div>
 	

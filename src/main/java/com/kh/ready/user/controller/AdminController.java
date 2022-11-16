@@ -214,15 +214,6 @@ public class AdminController {
 	}
 
 	/**
-	 * 주문관리
-	 */
-	// admin - 주문관리
-	@GetMapping("/admin/admin-order")
-	public String orderList() {
-		return "/admin/order/adminOrder";
-	}
-	
-	/**
 	 * 상품관리
 	 */
 	
@@ -299,11 +290,6 @@ public class AdminController {
 		return mv;
 	}
 	
-	// 상품 등록 폼
-	@GetMapping("/admin/admin-productForm")
-	public String productForm() {
-		return "/admin/product/adminProductRegistForm";
-	}
 	
 	// 상품 수정 폼
 	@GetMapping("/admin/admin-productModifyForm")
@@ -425,6 +411,7 @@ public class AdminController {
 		String result = adminService.recoverComm(boardNo);
 		return result;
 	}
+	
 	// 게시글 삭제
 	@ResponseBody
 	@GetMapping("/admin/terminateComm")
@@ -433,7 +420,7 @@ public class AdminController {
 		return result;
 	}
 	
-	// 처벌페이지
+	// 처분 페이지
 	@GetMapping("/admin/punishPage")
 	public String punishPage(Model model, 
 							@RequestParam("commWriter") String commWriter,
@@ -444,20 +431,19 @@ public class AdminController {
 		return "/admin/report/adminJudgementPage";
 	}
 	
-	// 유저에게 처벌 내리기 -> 처벌 페이지 만들기
+	// 유저 처분 메소드
 	@PostMapping("/admin/punish")
 	public String punishUser(@RequestParam("punishment") String punishment,
 							@RequestParam("userId") String userId,
 							@RequestParam("boardNo") Integer boardNo) {
 		
-		// 처벌의 내용(일단은 커뮤니티 접근금지or글쓰기금지//회원로그인금or탈퇴)이  -> 시큐리티 기능을 이용하면 좋을거같음 
-		// 컨트롤러로 넘어옴 
-		// 서비스로 보냄 
+		// 처벌의 내용(일단은 커뮤니티 글쓰기금지 // 회원로그인금or탈퇴)  -> 시큐리티 기능을 이용
 		
 		String result = adminService.punishUser(punishment, userId, boardNo);
-	//		if(result.equals("fail") || result.equals("error")) {
-	//			return "/main/errorPage";
-	//		}
+			if(result.equals("fail") || result.equals("error")) {
+				return "/exception/something";
+			}
+			
 		return "redirect:/admin/admin-report";
 	}
 	

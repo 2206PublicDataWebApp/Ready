@@ -33,6 +33,7 @@
 			<div class="container col-lg-8">
 			<h1>공지사항 수정</h1>
 			<form method="post" action="/admin/modifyNotice">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" name="noticeNumber" value="${notice.noticeNumber }" required>
 				<input width="100%" class="form-control mb-3" type="text" name="noticeTitle" value="${notice.noticeTitle }" >
 				<textarea width="100%" class="summernote" name="noticeContents" required>${notice.noticeContents }</textarea>

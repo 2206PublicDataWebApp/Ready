@@ -29,7 +29,7 @@
 			
 			<table class="table mt-5">
 				<thead>
-					<tr class="table-secondary border-bottom border-dark border-3">
+					<tr class="table border-3" bgcolor="#AA7139" style="color:white">
 						<th colspan="4">오늘의 주요 업무</th>
 					</tr>
 				</thead>

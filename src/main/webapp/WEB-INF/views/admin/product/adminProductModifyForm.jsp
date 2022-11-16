@@ -34,6 +34,7 @@
 					<img class="img-thumbnail" id="preview" src="${book.imgPath }"/>
 				</div>
 			<form method="post" action="/admin/modifyProduct">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" value="${book.bookNo }" name="bookNo">
 				<div class="form-group">
 					<label for="bookTitle">도서명</label> 

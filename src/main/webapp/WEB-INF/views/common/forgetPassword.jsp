@@ -8,12 +8,12 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/css/admin/button.css"/>
-<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 <style>
 * { 
 	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
@@ -29,6 +29,7 @@
 	<div class="card container col-lg-5 mt-5 p-5">
 		<form method="post" action="/forget-password">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<img src="../resources/images/READY-LOGO1.png" height="80px" style="margin: auto; display: block;">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="회원님의 아이디를 입력해주세요." id="userId" name="userId">
 			</div>

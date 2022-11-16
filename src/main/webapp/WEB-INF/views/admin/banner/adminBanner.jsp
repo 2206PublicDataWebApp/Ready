@@ -41,6 +41,7 @@
 					
 					</div>
 				<form method="post" action="/admin/registerBanner" encType="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input class="form-control" type="file" name="bannerImage"  onchange="readFile(this,1);">
 					<input type="hidden" name="bannerFrom" value="1">
 					<div class="mt-3 btn-section2" style="text-align:center">
@@ -76,6 +77,7 @@
 					</c:choose>
 					</div>
 				<form method="post" action="/admin/registerBanner" encType="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input class="form-control"  type="file" name="bannerImage"  onchange="readFile(this,2);">
 					<input type="hidden" name="bannerFrom" value="2">
 					<div class="mt-3 btn-section2" style="text-align:center">
@@ -111,6 +113,7 @@
 					</c:choose>
 					</div>
 				<form method="post" action="/admin/registerBanner" encType="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input class="form-control"  type="file" name="bannerImage"  onchange="readFile(this,3);">
 					<input type="hidden" name="bannerFrom" value="3">
 					<div class="mt-3 btn-section2" style="text-align:center">

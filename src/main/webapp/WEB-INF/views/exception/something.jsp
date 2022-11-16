@@ -14,6 +14,8 @@
 <body>
 	<div class="container col-lg-8">
 		<img class="img-fruid" src="../resources/images/exception/something-went-wrong.png"/>
+		<h3>알 수 없는 오류가 발생하였습니다. 관리자가 빠르게 처리하겠습니다.</h3>
+		<h3>5초 후 메인 페이지로 이동합니다.</h3>
 	</div>
 </body>
 </html>

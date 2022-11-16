@@ -25,7 +25,7 @@
 			<h4>신고된 글</h4>
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr bgcolor="#AA7139" style="color:white">
 						<th>글번호</th>
 						<th>제목</th>
 						<th>작성자</th>
@@ -85,7 +85,7 @@
 			<h4>처리된 글</h4>
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr bgcolor="#AA7139" style="color:white">
 						<th>글번호</th>
 						<th>제목</th>
 						<th>작성자</th>

@@ -10,10 +10,13 @@
 	rel="stylesheet"
 	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 	crossorigin="anonymous" />
+<style>
+body{
+ 	background: url(../resources/images/exception/access-denied.gif) no-repeat center fixed;
+  	background-size: cover;
+}
+</style>
 </head>
 <body>
-	<div class="container col-lg-8">
-		<img class="img-fluid" src="../resources/images/exception/access-denied.jpg"/>
-	</div>
 </body>
 </html>
