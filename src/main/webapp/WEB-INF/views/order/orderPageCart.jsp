@@ -309,7 +309,11 @@
             	<button class="btn" id="goback-btn" onclick="history.back();">이전 페이지</button>
             	<button class="btn" id="order-btn" onclick="requestPay(`${salePriceSum}` , `${cartList[0].book.bookTitle}` , `${productSum}`, `${mileageSum}`);">결제하기</button>							
         </div>
-        
+        <footer>
+        <div class="main-footer">
+		<jsp:include page="../main/footer.jsp"></jsp:include>
+		</div>
+		</footer>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	// 상품 총가격이 만원 이하 일시 화면단에 배송비 표시

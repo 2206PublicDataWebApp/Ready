@@ -305,6 +305,11 @@
             <button class="btn" id="goback-btn" onclick="location.href='/';">메인으로</button>
             <button class="btn" id="order-btn-complete" onclick="location.href='/book/category.kh?category=Best';">쇼핑 하러가기</button>
         </div>
+        <footer>
+        <div class="main-footer">
+		<jsp:include page="../main/footer.jsp"></jsp:include>
+		</div>
+		</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
 window.onload = function(){
