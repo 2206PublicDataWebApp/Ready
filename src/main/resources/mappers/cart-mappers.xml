@@ -71,6 +71,10 @@
 	<select id="selectTotalPrice" resultMap="CartResultMap">
 		SELECT SUM(PRODUCT_COUNT * PRODUCT_PRICE) FROM CART_TBL WHERE USER_ID = #{userId}
 	</select>
+		
+	<select id="countingCartByUserId" resultType="_int">
+		SELECT COUNT(*) FROM CART_TBL WHERE USER_ID = #{userId}
+	</select>
 	
 	<select id="getUserInfoByUserId" resultMap="userResultMap">
 		SELECT * FROM USER_TBL WHERE USER_ID = #{userId}

@@ -47,9 +47,11 @@ public class CartStoreLogic implements CartStore{
 		return session.selectOne("CartMapper.getUserInfoByUserId", userId);
 	}
 
+	@Override
+	public int countingCartByUserId(String userId) {
 
-
-
+		return session.selectOne("CartMapper.countingCartByUserId", userId);
+	}
 
 	
 }

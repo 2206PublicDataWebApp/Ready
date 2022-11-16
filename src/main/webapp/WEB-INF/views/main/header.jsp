@@ -16,6 +16,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Read'y</title>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -28,6 +29,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 	crossorigin="anonymous"></script>
+<script src="../resources/js/jquery-3.6.1.min.js"></script>
 <style>
 * { 
 	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
@@ -85,6 +87,21 @@
 
 .search {
 	width: 700px;
+}
+
+#red-Circle{
+	width : 15px;
+	height : 15px;
+	background-color : red;
+	border-radius : 50%;
+	position : relative;
+	top : 1%;
+	left : -10%;
+	font-size : 7px;
+	color : white;
+	text-align : center;
+	display : none;
+	margin-right : 0%;
 }
 </style>
 </head>
@@ -146,11 +163,12 @@
 					<p class="main-p">커뮤니티</p>
 			</span>
 			</a> <a href="/cart/cartView"
-				class="d-flex mb-3 mb-lg-0 me-lg-3 text-dark text-decoration-none">
-				<span class="center"> <i
+				class="d-flex mb-3 mb-lg-0 me-lg-3 text-dark text-decoration-none cart">
+				<span class="center cart-span"> <i
 					class="fa-solid fa-cart-shopping fa-xl"></i>
 					<p class="main-p">장바구니</p>
 			</span>
+					<div id="red-Circle"></div>
 			</a> <a href="/user/mypage.kh"
 				class="d-flex mb-3 mb-lg-0 me-lg-3 text-dark text-decoration-none">
 				<span class="center"> <i class="fa-solid fa-user fa-xl"></i>
@@ -164,3 +182,27 @@
 			</a>
 		</div>
 	</header>
+<script>
+
+function existedCart(){
+	
+	$.ajax({	// 장바구니에 있으면 빨간점 및 갯수 표시
+		url : "/cart/existedCart",
+		type : "get",
+		success : function(result){
+			if(!result == 0){
+				$("#red-Circle").css("display", "block");
+				$("#red-Circle").html(result);
+			}
+		}
+	})
+}
+
+const login = "${principal }";
+
+if(!login == "") {	// 로그인 되있을 경우 장바구니 카운트
+	existedCart();
+}
+
+
+</script>

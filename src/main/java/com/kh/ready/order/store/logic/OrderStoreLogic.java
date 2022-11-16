@@ -32,6 +32,24 @@ public class OrderStoreLogic implements OrderStore{
 	}
 
 	@Override
+	public Book getbookDataByBookNo(int bookNo) {
+		
+		return session.selectOne("BookMapper.selectOneBook", bookNo);
+	}
+
+	@Override
+	public List<Order> getOrderDataByOrderId(String orderId) {
+	
+		return session.selectList("OrderMapper.selectOrderListByOrderId", orderId);
+	}
+
+	@Override
+	public Order getOrderInfoByOrderId(String orderId) {
+	
+		return session.selectOne("OrderMapper.selectOneOrderByOrderId", orderId);
+	}
+
+	@Override
 	public int insertOrder(Order order) {
 		
 		return session.insert("OrderMapper.insertOrder",order);
@@ -42,24 +60,6 @@ public class OrderStoreLogic implements OrderStore{
 	public int deleteCart(String userId) {
 		
 		return session.delete("OrderMapper.deleteCart", userId);
-	}
-
-	@Override
-	public Book getbookDataByBookNo(int bookNo) {
-		
-		return session.selectOne("BookMapper.selectOneBook", bookNo);
-	}
-
-	@Override
-	public List<Order> getOrderDataByOrderId(String orderId) {
-
-		return session.selectList("OrderMapper.selectOrderListByOrderId", orderId);
-	}
-
-	@Override
-	public Order getOrderInfoByOrderId(String orderId) {
-
-		return session.selectOne("OrderMapper.selectOneOrderByOrderId", orderId);
 	}
 
 	@Override
@@ -92,10 +92,8 @@ public class OrderStoreLogic implements OrderStore{
 
 	@Override
 	public int updateOrderState(String orderId) {
-		int result = session.update("OrderMapper.updateOrderState", orderId);
-		System.out.println("Store : " + result);
-		System.out.println("Store orderID : " + orderId);
-		return result;
+
+		return session.update("OrderMapper.updateOrderState", orderId);
 	}
 	
 }

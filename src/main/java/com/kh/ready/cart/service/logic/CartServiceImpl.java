@@ -47,6 +47,12 @@ public class CartServiceImpl implements CartService{
 		return cartStore.getUserInfoByUserId(userId);
 	}
 
+	@Override
+	public int countingCartByUserId(String userId) {
+
+		return cartStore.countingCartByUserId(userId);
+	}
+
 
 	
 }

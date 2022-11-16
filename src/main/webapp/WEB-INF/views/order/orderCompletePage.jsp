@@ -6,10 +6,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>책메이트 : 주문 완료</title>
+    <title>리디 주문 완료</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="../resources/css/cart_order/order.css" rel="stylesheet">
     <script src="../resources/js/jquery-3.6.1.min.js"></script>
@@ -159,6 +160,14 @@
                         
                     </td>
                 </tr>
+                <tr>
+                    <td class="addr-info-td">
+                        <p class="order-info-p">주문 상태</p>
+                    </td>
+                    <td>
+                        <p class="order-info-p"><input type="text" id="orderState" value="${orderInfo.orderState }" readonly style="border : 0px; text-align:left;"></p>
+                    </td>
+                </tr>
             </table>
         </div>
 
@@ -207,7 +216,12 @@
                                   <!-- 정가 -->
                                   <td><fmt:formatNumber type="number" pattern="###,###,###" value="${orderList.book.priceSales}"/>원</td>
                                   <!-- 할인가 -->
-                                  <td><fmt:formatNumber type="number" pattern="###,###,###" value="${orderList.productPrice}"/>원</td>
+                                  <td>
+			                        <div style="margin-top:47%;">
+			                        <fmt:formatNumber type="number" pattern="###,###,###" value="${orderList.productPrice}"/>원
+			                        <p>(${discountRate } <img src="https://img.ypbooks.co.kr/ypbooks/images/icon_down.gif" alt="down" id="discountArrow">)</p>
+			                        </div>
+			                       </td>
                                   <!-- 수량 -->
                                   <td>${orderList.productCount }</td>
                                   <!-- 할인가*수량 -->
@@ -271,40 +285,51 @@
         </div>
         <c:if test="${orderInfo.orderState eq 'N'}">
 	        <div class="div-confirmPurchase">
-	            <button class="btn btn-primary btm-btn" onclick="cancelPay(`${orderInfo.orderId }`, ${orderInfo.totalPrice},`${orderInfo.impUid}`);">환불하기</button>
-	            <button class="btn btn-primary btm-btn" onclick="confirmPurchase(${salePriceSum});">구매 확정</button>
+	            <button class="btn" onclick="cancelPay(`${orderInfo.orderId }`, ${orderInfo.totalPrice},`${orderInfo.impUid}`);">환불하기</button>
+	            <button class="btn" onclick="confirmPurchase(${salePriceSum});">구매 확정</button>
 	       	</div>
        	</c:if>
        	<c:if test="${orderInfo.orderState eq 'Y'}">
 	        <div class="div-confirmPurchase">
-	            <button class="btn btn-primary btm-btn" onclick="alert('이미 구매 확정된 주문입니다!');">환불하기</button>
-	            <button class="btn btn-primary btm-btn" onclick="alert('이미 구매 확정된 주문입니다!');">구매 확정</button>
+	            <button class="btn" onclick="alert('이미 구매 확정된 주문입니다!');">환불하기</button>
+	            <button class="btn" onclick="alert('이미 구매 확정된 주문입니다!');">구매 확정</button>
 	        </div>
        	</c:if>
        	<c:if test="${orderInfo.orderState eq 'R'}">
 	        <div class="div-confirmPurchase">
-	            <button class="btn btn-primary btm-btn" onclick="alert('이미 전액 환불된 주문입니다!');">환불하기</button>
-	            <button class="btn btn-primary btm-btn" onclick="alert('이미 전액 환불된 주문입니다!');">구매 확정</button>
+	            <button class="btn" onclick="alert('이미 전액 환불된 주문입니다!');">환불하기</button>
+	            <button class="btn" onclick="alert('이미 전액 환불된 주문입니다!');">구매 확정</button>
 	        </div>
        	</c:if>
-        <div id="order-btn">
-            <button class="btn btn-secondary btm-btn" onclick="location.href='/';">메인으로</button>
-            <button class="btn btn-primary btm-btn" onclick="history.go(-2);">계속 쇼핑하기</button>
+        <div id="div-order-btn">
+            <button class="btn" id="goback-btn" onclick="location.href='/';">메인으로</button>
+            <button class="btn" id="order-btn-complete" onclick="location.href='/book/category.kh?category=Best';">쇼핑 하러가기</button>
         </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
 window.onload = function(){
-	var bookPrice = ${priceSum};
-	var paymethod = $("#payMethod").val();
+	const price = ${priceSum};
+	let paymethod = $("#payMethod").val();
+	let orderState = $("#orderState").val();
+	let discountRate = $("#discountRate").val();
 	
 	if(paymethod == "card"){
 		$("#payMethod").val("신용카드");
-	} else if(paymethod == "kakaopay"){
+	} else if(paymethod == "kakaopay" || paymethod == "point"){
 		$("#payMethod").val("카카오 페이");
 	} else if(paymethod == "trans"){
 		$("#payMethod").val("실시간 계좌 이체");
 	}
-	if(bookPrice < 10000) {
+	
+	if(orderState == "N"){
+		$("#orderState").val("결제 완료");
+	} else if(orderState == "R") {
+		$("#orderState").val("환불 완료");
+	} else if(orderState == "Y"){
+		$("#orderState").val("구매 확정");
+	}
+	
+	if(price < 10000) {
 		$("#id-delivery-fee").attr("value", "2,500");
 	}
 }
@@ -331,7 +356,7 @@ window.onload = function(){
 					success : function(result){
 						if(result > 2) {
 							alert("구매 확정 되었습니다.");
-							location.href="/mypage/myOrder.kh";
+							window.location.reload(true);
 						}
 					},
 					error : function(result){
@@ -349,9 +374,7 @@ window.onload = function(){
 	function cancelPay(orderId, payedPrice, impUid){
 		
 		const confirmCancelPay = confirm("정말 환불을 진행하시겠습니까? \n마일리지를 되돌려 받을 수 없습니다.");
-		const orderId2 = ${orderInfo.orderId };
-		console.log(orderId2);
-		console.log(orderId);
+
 		if(confirmCancelPay){
 			$.ajax({
 				url : "/refund/doRefund",
@@ -371,7 +394,7 @@ window.onload = function(){
 						},
 						success : function(orderId){
 							alert("주문번호 : "+orderId+ "\n환불이 완료되었습니다.");
-							location.href="/order/orderDetailView?orderId="+orderId;
+							window.location.reload(true);
 						},
 						error : function(error){
 							console.log(error);

@@ -38,6 +38,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<Order> getOrderDataByOrderId(String orderId) {
+	
+		return orderStore.getOrderDataByOrderId(orderId);
+	}
+
+	@Override
+	public Order getOrderInfoByOrderId(String orderId) {
+	
+		return orderStore.getOrderInfoByOrderId(orderId);
+	}
+
+	@Override
 	public int insertOrder(Order order) {
 
 		return orderStore.insertOrder(order);
@@ -47,18 +59,6 @@ public class OrderServiceImpl implements OrderService {
 	public int deleteCart(String userId) {
 
 		return orderStore.deleteCart(userId);
-	}
-
-	@Override
-	public List<Order> getOrderDataByOrderId(String orderId) {
-
-		return orderStore.getOrderDataByOrderId(orderId);
-	}
-
-	@Override
-	public Order getOrderInfoByOrderId(String orderId) {
-
-		return orderStore.getOrderInfoByOrderId(orderId);
 	}
 
 	@Override
@@ -76,13 +76,13 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int updatePurchaseInfoByUserId(String userId, int plusedMileage, int userPurchase) {
 		
-		String userTier = "BRONZE";
+		String userTier = "BRONZE";	// 사용자는 회원가입시 디폴트 등급이 브론즈
 		
-		if(userPurchase >= 200000 && userPurchase < 500000) {
+		if(userPurchase >= 200000 && userPurchase < 500000) { // 총 구매액이 20만 이상 50만 이하일 경우 등급 실버
 			userTier = "SILVER";	
-		} else if(userPurchase >= 500000 && userPurchase < 1000000) {
+		} else if(userPurchase >= 500000 && userPurchase < 1000000) {	// 총 구매액이 50만 이상 100만 이하일 경우 등급 골드
 			userTier = "GOLD";
-		} else if(userPurchase >= 1000000) {
+		} else if(userPurchase >= 1000000) {	// 총 구매액이  100만 이상일 경우 등급 VIP
 			userTier = "VIP";
 		}
 		
@@ -91,10 +91,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int updateOrderState(String orderId) {
-		int result = orderStore.updateOrderState(orderId);
-		System.out.println("Service : " + result);
-		System.out.println("Store orderID : " + orderId);
-		return result;
+
+		return orderStore.updateOrderState(orderId);
 	}
 
 }

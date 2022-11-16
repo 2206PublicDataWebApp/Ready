@@ -7,23 +7,23 @@ import com.kh.ready.cart.domain.Cart;
 
 public class Order {
 
-	private int orderNo;
-	private Integer bookNo;
-	private String userId;
-	private Integer productCount;
-	private String orderRName;
-	private String orderRPhone;
-	private String orderAddress1;
-	private String orderAddress2;
-	private String orderAddress3;
-	private String paymentMethod;
-	private String orderState;
-	private Date orderDate;
-	private String orderId;
-	private int productPrice;
-	private int totalPrice;
-	private int useMileage;
-	private String impUid;
+	private int orderNo;	// 주문 테이블 PK값 
+	private Integer bookNo;	// 책 번호 ( 책 테이블 PK값 )
+	private String userId;	// 사용자 아이디
+	private Integer productCount;	// 상품 수량
+	private String orderRName;	// 수취인 이름
+	private String orderRPhone;	// 수취인 연락처
+	private String orderAddress1;	// 배송지 우편번호
+	private String orderAddress2;	// 배송지 도로명 주소
+	private String orderAddress3;	// 배송지 상세주소
+	private String paymentMethod;	// 결제 방법
+	private String orderState;	// 주문 상태
+	private Date orderDate;	// 주문 날짜
+	private String orderId;	// 주문 번호
+	private int productPrice;	// 상품 한개 가격
+	private int totalPrice;	// 주문의 총 가격
+	private int useMileage;	// 사용한 마일리지
+	private String impUid;	// 아임포트 고유번호 (API)
 	
 	private Book book;
 	private Cart cart;

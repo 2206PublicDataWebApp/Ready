@@ -6,10 +6,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>책메이트 : 주문하기</title>
+    <title>리디 주문하기</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/main/mainHeader.css">
     <link href="../resources/css/cart_order/order.css" rel="stylesheet">
@@ -43,10 +44,14 @@
                             </tr>
                         </tbody>
                 <tbody class="cartbody">
+                	<!-- 상품 총 가격 c:set 설정 -->
                 	<c:set var="priceSum" value="0"/>
+                	<!-- 상품 총 갯수 c:set 설정 -->
                 	<c:set var="productSum" value="0"/>
                 	<c:forEach items="${cartList }" var="cartList" varStatus="i">
+                	<!-- 할인이 적용된 상품 총가격 누적합계 구하기 -->
                     <c:set var="salePrice" value="${(cartList.book.priceSales * discountRate)-((cartList.book.priceSales * discountRate)%10)}"/>
+                    <!-- script에 작업에 필요한 값  책PK값과 해당 할인된 상품 가격 -->
                 	<input type="hidden" name="bookNo" value="${cartList.book.bookNo }">
                 	<input type="hidden" name="productPrice" value="${salePrice }">
                     <tr>
@@ -54,7 +59,9 @@
                             <img class="product-img" src="${cartList.book.imgPath }">
                         </td>
                         <td>
+                        	<!-- 마우스 커서 갖다댈시 다 보이게 타이틀에 책 이름 설정  -->
                         	<div title ="${cartList.book.bookTitle }">
+                        	 <!-- 책 이름 길이가 20이 넘는 제목은 ... 으로 요약 -->
                             <c:choose>
                             	<c:when test="${fn:length(cartList.book.bookTitle) gt 20 }">
                             	<c:out value="${fn:substring(cartList.book.bookTitle, 0, 19) }...">
@@ -62,7 +69,6 @@
                             	<c:otherwise>
                             	<c:out value="${cartList.book.bookTitle }">
                             	</c:out></c:otherwise>
-<%--                             <p id="bookTitle" style="margin-bottom: 10%;">${cartList.book.bookTitle }</p> --%>
                             </c:choose>
                             </div>
                         </td>
@@ -82,12 +88,18 @@
                         <!-- 마일리지*수량 -->
                         <td><fmt:formatNumber type="number" pattern="###,###,###" value="${cartList.book.mileage * cartList.productCount }"/>P</td>
                     </tr>
+                    <!-- 할인 안된 상품 총 가격 합계 구하기 -->
                     <c:set var="priceSum" value="${priceSum + (cartList.book.priceSales * cartList.productCount) }"/>
+                    <!-- 상품 총 수량 누적 합계 구하기 -->
                     <c:set var="productSum" value="${productSum + cartList.productCount }"/>
+                    <!-- 할인된 상품 총 가격 합계 구하기 -->
                     <c:set var="salePriceSum" value="${salePriceSum + (salePrice * cartList.productCount)}"/>
+                    <!-- 예상 적립 마일리지 누적 합계 구하기 -->
                     <c:set var="mileageSum" value="${mileageSum + (cartList.book.mileage * cartList.productCount) }"/>
                     </c:forEach>
+                    <!-- 상품 총 가격이 만원 이상일 경우를 위한 cset 설정 -->
                     <c:set var="onlysalePriceSum" value="${salePriceSum}"/>
+                    <!-- 상품 총 가격이 만원 이하일 경우 배송비 2500원 누적으로 더 더해줌 -->
                     <c:if test="${priceSum < 10000}">
                     	<c:set var="salePriceSum" value="${salePriceSum + 2500}"/>
                     </c:if>
@@ -179,7 +191,7 @@
                         	<input class="form-control form-control-sm name-phone" id="reciverName" type="text" placeholder="이름" value="" style="width:130px">
                     	</div>
                     	<div class="div-floatLeft">
-                        	<button class="btn btn-secondary" id="infocopy-btn" onclick="copyInfo();">구매자정보 복사</button>
+                        	<button class="btn" id="infocopy-btn" onclick="copyInfo();">구매자정보 복사</button>
                     	</div>
                     </td>
                 </tr>
@@ -208,7 +220,7 @@
                         	<input class="form-control form-control-sm Addr1" id="reciverZoneCode" type="text" value="" placeholder="우편번호" style="width:90px;">
                         </div>
                         <div class="div-floatLeft">
-                        	<button class="btn btn-secondary searchAddr-btn" onclick="reciverAddrSearch();" style="font-size :12px;">우편번호 검색</button>
+                        	<button class="btn searchAddr-btn" onclick="reciverAddrSearch();" style="font-size :12px;">우편번호 검색</button>
                         </div>
                     </td>
                 </tr>
@@ -258,9 +270,9 @@
 					<td><fmt:formatNumber type="number" pattern="###,###,###" value="${mileageSum}"/> P</td>
                 </tbody>
             </table>
-            <div style="text-align:right;">
-            	<p>현재 보유한 마일리지 : <input type="text" value="${userInfo.userReserves }" id="currentMileage" style="border:0px; width:100px;" readonly>P</p>
-            	마일리지 : <input type="text" value="0" id="useMileage" style="width:100px;">P <button onclick="useMileage(${salePriceSum }, ${onlysalePriceSum });">사용</button>
+            <div class="div-mileage">
+            	<p>보유 마일리지 : <input type="text" value="${userInfo.userReserves }" id="currentMileage" style="border:0px; width:100px;" readonly> P  </p>
+            	마일리지 : <input type="text" value="0" id="useMileage" style="width:100px;"><button class="btn mileage-btn" onclick="useMileage(${salePriceSum }, ${onlysalePriceSum });">사용</button>
         	</div>
         </div>
         
@@ -293,14 +305,14 @@
 			  	</label>
 			</div><br>
 		</div>
-        <div id="order-btn">
-            <button class="btn btn-secondary btm-btn" onclick="history.back();">이전 페이지</button>
-            <button class="btn btn-primary btm-btn" onclick="requestPay(`${salePriceSum}` , `${cartList[0].book.bookTitle}` , `${productSum}`, `${mileageSum}`);">결제하기</button>							
+        <div id="div-order-btn">
+            	<button class="btn" id="goback-btn" onclick="history.back();">이전 페이지</button>
+            	<button class="btn" id="order-btn" onclick="requestPay(`${salePriceSum}` , `${cartList[0].book.bookTitle}` , `${productSum}`, `${mileageSum}`);">결제하기</button>							
         </div>
         
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-
+	// 상품 총가격이 만원 이하 일시 화면단에 배송비 표시
 	window.onload = function(){
 		var bookPrice = ${priceSum};
 		if(bookPrice < 10000) {
@@ -309,9 +321,7 @@
 		}
 	}
 	
-	var IMP = window.IMP;
-	IMP.init('imp45674133');
-
+	// 다음 우편번호 찾기 API 사용
     function byuerAddrSearch(){
         new daum.Postcode({
             oncomplete: function(data) {
@@ -332,6 +342,7 @@
         }).open();
     }
     
+    // 구매자와 배송지 동일할 경우 배송지 칸에 구매자 정보 자동 입력
     function copyInfo(){
     	const buyerName = $("#buyerName").val();
     	$("#reciverName").attr('value',buyerName);
@@ -352,15 +363,17 @@
     	$("#reciverDetailAddr").attr('value',buyerDetailAddr);
     }
     
+    // 마일리지 사용 펑션
 	function useMileage(salePriceSum, onlysalePriceSum){
     	
-		var inputMileage = $("#useMileage");
-    	var currentMileage = +$("#currentMileage").val();
-    	var useMileage = +$("#useMileage").val();
-    	var pacSalePriceSum = salePriceSum;
-    	var onlySalePriceSum = onlysalePriceSum;
-		var num_check= /^[0-9]+$/;
+		const inputMileage = $("#useMileage");	// focus 메소드를 사용하기 위한 마일리지 input 태그 변수 생성
+		const currentMileage = +$("#currentMileage").val();	// 현재 보유한 마일리지 값 변수 생성
+		const useMileage = +$("#useMileage").val();	// 사용할 마일리지 변수 생성
+		const pacSalePriceSum = salePriceSum;	// 만원 넘었을 경우  배송비 포함된 변수 생성
+		const onlySalePriceSum = onlysalePriceSum;	// 만원이 안넘었을 경우 배송비 미포함 변수 생성
+		const num_check= /^[0-9]+$/;
 		
+    	// 마일리지 사용 위한 유효성 검사
     	if(currentMileage < useMileage) {
     		alert("현재 보유한 마일리지가 부족합니다!");
     		inputMileage.focus();
@@ -374,98 +387,117 @@
 			inputMileage.focus();
 			return false;
     	} else {
-    		var calPrice = pacSalePriceSum - useMileage;
-    		var caledPrice = calPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    		const calPrice = pacSalePriceSum - useMileage;	// 사용한 마일리지  계산
+    		const caledPrice = calPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");	// 숫자 콤마 표시 제거
 		
-    		$("#id-total-price").attr("value", caledPrice);
+    		$("#id-total-price").attr("value", caledPrice);	// 화면단 표시를 위해 총금액 계산된 숫자로 값 변경 
     	}
     }
     
+	// 아임포트 API 쓰기위한 사전작업
+	var IMP = window.IMP;
+	IMP.init('imp45674133');
     
+    // 결제 버튼 (주문)
     function requestPay(priceSum, firstTitle, totalCount, mileageSum) {
     	
-    	const orderId = (new Date().getFullYear())+""+(new Date().getMonth()+1) +(new Date().getDate())+new Date().getTime();
-    	const totalPrice = Math.floor(priceSum);
-    	const buyerName = $("#buyerPhone").val();
-    	const buyerPhone = $("#buyerPhone").val();
+    	const orderId = (new Date().getFullYear())+""+(new Date().getMonth()+1) +(new Date().getDate())+new Date().getTime(); // 주문번호 생성
+    	const totalPrice = Math.floor(priceSum);	// 총 가격에서 소수점 버린 변수 생성
+    	const buyerName = $("#buyerPhone").val();	
+    	const buyerPhone = $("#buyerPhone").val();	// DB에 들어갈 데이터들 변수 생성
     	const buyerEmail = $("#buyerEmail").val();
     	const paymethod = $('input:radio[name=paymentmethod]:checked').val();
     	
-    	var bookNoArr = [];
- 	    var productCountArr = [];
- 	    var productPriceArr = [];
- 	    
- 	    var useMileage = +$("#useMileage").val();
-   		var calPrice = totalPrice - useMileage;
- 	    
-    	$("input[name='bookNo']").each(function(i){
-    		bookNoArr.push($(this).val());
- 		});
-    	$("input[name='productCount']").each(function(i){
-    		productCountArr.push($(this).val());
- 		});
-    	$("input[name='productPrice']").each(function(i){
-    		productPriceArr.push(Math.floor($(this).val()));
-    	});
-
-        IMP.request_pay({ // param
-            pg: "html5_inicis",
-            pay_method: paymethod,
-            merchant_uid: orderId,
-            name: firstTitle + " 등  총  "+ totalCount + "권",
-            amount: calPrice,
-            buyer_email: buyerEmail,
-            buyer_name: buyerName,
-            buyer_tel: buyerPhone,
-            custom_data: {
-            	bookNoArr : bookNoArr,
-            	productCountArr : productCountArr,
-            	productPriceArr : productPriceArr,
-            	mileageSum : mileageSum,
-            	useMileage : useMileage,
-            	totalPrice : totalPrice,
-            	orderId : orderId,
-            	reciverName : $("#reciverName").val(),
-            	reciverPhone : $("#reciverPhone").val(),
-            	reciverEmail : $("#reciverEmail").val(),
-            	reciverZoneCode : $("#reciverZoneCode").val(),
-            	reciverRoadAddr : $("#reciverRoadAddr").val(),
-            	reciverDetailAddr : $("#reciverDetailAddr").val()
-            }
-        }, function (rsp) { // callback
-            if (rsp.success) {
-        	console.log("response Data : ", rsp.custom_data);
-				$.ajax({
-					url :"/order/insertCartOrder",
-					type : "POST",
-					data : {
-						imp_uid: rsp.imp_uid,
-						orderId : rsp.custom_data.orderId,
-						bookNoArr : rsp.custom_data.bookNoArr,
-						productCountArr : rsp.custom_data.productCountArr,
-						productPriceArr : rsp.custom_data.productPriceArr,
-						mileageSum : rsp.custom_data.mileageSum,
-						paymethod : rsp.pay_method,
-						reciverName : rsp.custom_data.reciverName,
-						reciverPhone : rsp.custom_data.reciverPhone,
-						reciverEmail : rsp.custom_data.reciverEmail,
-		            	reciverZoneCode : rsp.custom_data.reciverZoneCode,
-		            	reciverRoadAddr : rsp.custom_data.reciverRoadAddr,
-		            	reciverDetailAddr : rsp.custom_data.reciverDetailAddr,
-		            	useMileage : rsp.custom_data.useMileage,
-		            	totalPrice : rsp.custom_data.totalPrice
-					},
-					success : function(orderId){
-						location.href="/order/orderDetailView?orderId="+orderId;
-					},
-					error : function(orderId){
-						alert("fail");
-					}
-				})
-            } else {
-				alert("결제가 실패하였습니다. 에러내용 : " + rsp.error_msg);
-            }
-        });
+   		const reciverName = $("#reciverName").val();
+   		const reciverPhone = $("#reciverPhone").val();
+   		const reciverEmail = $("#reciverEmail").val();
+   		const reciverZoneCode = $("#reciverZoneCode").val();
+   		const reciverRoadAddr = $("#reciverRoadAddr").val();
+   		const reciverDetailAddr = $("#reciverDetailAddr").val();
+   		
+   		if(reciverName == "" && reciverPhone == "" && reciverEmail == "" && reciverZoneCode == "" && reciverRoadAddr == "" && reciverDetailAddr == ""){
+   			alert("배송 정보를 확인해주세요");
+   			return false;
+   		} else {
+	    	// 카트에 한가지 품목만 담는게 아닌 여러 품목이 들어갈 수 있기 때문에 리스트 변수 생성
+	    	var bookNoArr = [];
+	 	    var productCountArr = [];
+	 	    var productPriceArr = [];
+	 	    
+	 	    var useMileage = +$("#useMileage").val();
+	   		var calPrice = totalPrice - useMileage;	// 마일리지 사용한만큼 계산
+	 	    
+	   		// 생성된 리스트에 길이만큼 값 푸쉬
+	    	$("input[name='bookNo']").each(function(i){
+	    		bookNoArr.push($(this).val());
+	 		});
+	    	$("input[name='productCount']").each(function(i){
+	    		productCountArr.push($(this).val());
+	 		});
+	    	$("input[name='productPrice']").each(function(i){
+	    		productPriceArr.push(Math.floor($(this).val()));
+	    	});
+	
+	        IMP.request_pay({ // 아임포트에 보내줄 데이터들
+	            pg: "html5_inicis",
+	            pay_method: paymethod,
+	            merchant_uid: orderId,
+	            name: firstTitle + " 등  총  "+ totalCount + "권",
+	            amount: calPrice,
+	            buyer_email: buyerEmail,
+	            buyer_name: buyerName,
+	            buyer_tel: buyerPhone,
+	            custom_data: {
+	            	bookNoArr : bookNoArr,
+	            	productCountArr : productCountArr,
+	            	productPriceArr : productPriceArr,
+	            	mileageSum : mileageSum,
+	            	useMileage : useMileage,
+	            	totalPrice : totalPrice,
+	            	orderId : orderId,
+	            	reciverName : $("#reciverName").val(),
+	            	reciverPhone : $("#reciverPhone").val(),
+	            	reciverEmail : $("#reciverEmail").val(),
+	            	reciverZoneCode : $("#reciverZoneCode").val(),
+	            	reciverRoadAddr : $("#reciverRoadAddr").val(),
+	            	reciverDetailAddr : $("#reciverDetailAddr").val()
+	            }
+	        }, function (rsp) { // callback
+	            if (rsp.success) {	// 성공 시 DB에 인서트
+					$.ajax({
+						url :"/order/insertCartOrder",
+						type : "POST",
+						data : {
+							imp_uid: rsp.imp_uid,
+							orderId : rsp.custom_data.orderId,
+							bookNoArr : rsp.custom_data.bookNoArr,
+							productCountArr : rsp.custom_data.productCountArr,
+							productPriceArr : rsp.custom_data.productPriceArr,
+							mileageSum : rsp.custom_data.mileageSum,
+							paymethod : rsp.pay_method,
+							reciverName : rsp.custom_data.reciverName,
+							reciverPhone : rsp.custom_data.reciverPhone,
+							reciverEmail : rsp.custom_data.reciverEmail,
+			            	reciverZoneCode : rsp.custom_data.reciverZoneCode,
+			            	reciverRoadAddr : rsp.custom_data.reciverRoadAddr,
+			            	reciverDetailAddr : rsp.custom_data.reciverDetailAddr,
+			            	useMileage : rsp.custom_data.useMileage,
+			            	totalPrice : rsp.custom_data.totalPrice
+						},
+						success : function(orderId){	// 주문완료시 해당 주문번호의 주문완료 페이지로 이동
+							location.href="/order/orderDetailView?orderId="+orderId;
+						},
+						error : function(orderId){
+							alert("fail");
+						}
+					})
+	            } else {
+					alert("결제가 실패하였습니다. 에러내용 : " + rsp.error_msg);
+	            }
+	        });
+   			
+   		}
+    	
     }
 
 </script>

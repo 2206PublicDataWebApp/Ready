@@ -22,7 +22,14 @@ public class CartContorller {
 	@Autowired
 	private CartService cartService;
 	
-	@ResponseBody
+	
+	/**
+	 * 장바구니 담기 
+	 * @param cart
+	 * @param principal
+	 * @return result , 0
+	 */
+	@ResponseBody // cartPage.jsp
 	@PostMapping(value="/cart/insert")
 	public int insertCart(Cart cart, Principal principal){
 		
@@ -34,12 +41,17 @@ public class CartContorller {
 
 			return result;			
 		} catch (Exception e) {
-			return 0;
+			return 0;	// 해당 사용자 장바구니에 이미 같은 상품이 있는 경우(유니크키) 예외처리를 통해 0을 리턴 
 		}
 	}
 
-	
-	@ResponseBody
+	/**
+	 * 장바구니 삭제
+	 * @param cart
+	 * @param principal
+	 * @param chArr
+	 */
+	@ResponseBody	// cartPage.jsp
 	@PostMapping(value="/cart/delete")
 	public void deleteCart(Cart cart, Principal principal, @RequestParam(value="checkArr[]") List<String> chArr) {
 		
@@ -49,7 +61,7 @@ public class CartContorller {
 			
 			int cartNo = 0;
 			
-			for(String i : chArr) {   
+			for(String i : chArr) {   	// ajax를 통해 넘어온 chArr 리스트를 통해 그 길이 만큼 해당 카트PK값 삭제
 				cartNo = Integer.parseInt(i);
 				cart.setCartNo(cartNo);
 				cartService.deleteCart(cart);
@@ -60,8 +72,14 @@ public class CartContorller {
 		}
 	}
 	
-	
-	@ResponseBody
+	/**
+	 * 장바구니 수량 수정
+	 * @param cart
+	 * @param principal
+	 * @param cartNo
+	 * @param productCount
+	 */
+	@ResponseBody	// cartPage.jsp
 	@PostMapping(value="/cart/modifyCount")
 	public void modifyCart(Cart cart, Principal principal,
 			@RequestParam("cartNo") int cartNo, @RequestParam("productCount") int productCount) {
@@ -81,6 +99,12 @@ public class CartContorller {
 	}
 	
 
+	/**
+	 * 장바구니 뷰
+	 * @param mv
+	 * @param principal
+	 * @return mv
+	 */
 	@GetMapping(value="/cart/cartView")
 	public ModelAndView showCartView(ModelAndView mv, Principal principal) {
 		
@@ -91,9 +115,10 @@ public class CartContorller {
 			
 			User userInfo = cartService.getUserInfoByUserId(userId);
 			String userTier = userInfo.getUserTier();
-			double discountRate = 0;
-			String discountPercent = "";
+			double discountRate = 0;		 // 할인율을 곱하기 위한 변수 생성
+			String discountPercent = "";	 // 할인율을 표시하기 위한 변수 생성
 			
+			// 회원 등급에 따른 할인율 적용
 			if(userTier.equals("BRONZE")) {
 				discountRate = 0.99;
 				discountPercent = "1%";
@@ -120,4 +145,18 @@ public class CartContorller {
 		return mv;
 	}
 	
+	/**
+	 * 장바구니 카운트
+	 * @param principal
+	 * @return result
+	 */
+	@ResponseBody	// header.jsp
+	@GetMapping(value="/cart/existedCart")
+	public int existedCart(Principal principal) {
+		
+		String userId = principal.getName();
+		int result = cartService.countingCartByUserId(userId);
+
+		return result;
+	}
 }

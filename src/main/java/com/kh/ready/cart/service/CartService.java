@@ -17,4 +17,6 @@ public interface CartService {
 
 	User getUserInfoByUserId(String userId);
 
+	int countingCartByUserId(String userId);
+
 }

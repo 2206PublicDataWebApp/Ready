@@ -15,15 +15,15 @@ public interface OrderService {
 
 	User getUserInfoByUserId(String userId);
 
-	int insertOrder(Order order);
-
-	int deleteCart(String userId);
-
 	Book getbookDataByBookNo(int bookNo);
 
 	List<Order> getOrderDataByOrderId(String orderId);
 
 	Order getOrderInfoByOrderId(String orderId);
+
+	int insertOrder(Order order);
+
+	int deleteCart(String userId);
 
 	int updateMileageByUserId(String userId, int usedMileage);
 

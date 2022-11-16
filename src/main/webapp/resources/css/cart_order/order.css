@@ -16,12 +16,109 @@ td > .div-floatLeft > button {
     background-color: #E4DDD3;
     color : #804A15;
     border-color : #E4DDD3;
-    
 }
-td> .div-floatLeft > button:hover {
+.div-floatLeft > #infocopy-btn:hover {
      background-color:#E4DDD3;
      color : #804A15;
      border-color : #804A15;
+}
+
+.addr-info-td > .div-floatLeft > button {
+    background-color: #E4DDD3;
+    color : #804A15;
+    border-color : #E4DDD3;
+    
+}
+.div-floatLeft > .searchAddr-btn:hover {
+     background-color:#E4DDD3;
+     color : #804A15;
+     border-color : #804A15;
+}
+.div-mileage{
+	text-align:right;
+}
+
+.div-mileage > button {
+	display: inline-flex;
+  	flex-direction: column;
+ 	align-items: center;
+  	justify-content: flex-start;
+  	white-space : nowrap;
+	width: 40px;
+	height : 30px;
+	margin-bottom : 3px;
+	margin-left : 10px;
+	font-size :12px;
+    background-color: #E4DDD3;
+    color : #804A15;
+    border-color : #E4DDD3;
+}
+.div-mileage > .mileage-btn:hover {
+	 display: inline-flex;
+  	 flex-direction: column;
+ 	 align-items: center;
+  	 justify-content: flex-start;
+  	 white-space : nowrap;
+	 width: 40px;
+	 height : 30px;
+	 margin-bottom : 3px;
+	 margin-left : 10px;
+	 font-size :12px;
+     background-color:#E4DDD3;
+     color : #804A15;
+     border-color : #804A15;
+}
+
+#goback-btn {
+    background-color: white;
+    color : #804A15;
+    border-color : #804A15;
+}
+#goback-btn:hover {
+     background-color:#E4DDD3;
+     color : #804A15;
+     border-color : #E4DDD3;
+}
+#order-btn{
+     width : 100px;
+     background-color:#AA7139;
+     color : white;
+}
+#order-btn:hover {
+     width : 100px;
+     background-color: #804A15;
+     color : white;
+     border-color : #804A15;
+}
+#order-btn-complete{
+     width : 130px;
+     background-color:#AA7139;
+     color : white;
+}
+#order-btn-complete:hover {
+     width : 130px;
+     background-color: #804A15;
+     color : white;
+     border-color : #804A15;
+}
+
+.div-confirmPurchase > button {
+    background-color: #E4DDD3;
+    color : #804A15;
+    border-color : #E4DDD3;
+}
+.div-confirmPurchase > button:hover {
+     background-color:#E4DDD3;
+     color : #804A15;
+     border-color : #804A15;
+}
+
+#useMileage{
+	background-color : lightgray;
+	border-radius : 10px;
+	border:0px;
+	width:100px;
+	outline : 0px;
 }
 
 #order-title{
@@ -46,9 +143,9 @@ td{
     margin : 0 auto;
 }
 #discountArrow{
-		width:10px;
-		height:11px;
-		margin-bottom:2px;
+	width:10px;
+	height:11px;
+	margin-bottom:2px;
 }
 .buyer-data-list{
     width : 1400px;
@@ -100,7 +197,7 @@ td{
     border-bottom: solid 3px #e2c9a6;
     text-align : center;
 }
-#order-btn{
+#div-order-btn{
     padding: 150px;
     text-align : center;
 }

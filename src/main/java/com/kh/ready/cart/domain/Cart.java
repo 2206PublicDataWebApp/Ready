@@ -2,12 +2,13 @@ package com.kh.ready.cart.domain;
 
 import com.kh.ready.book.domain.Book;
 
+
 public class Cart {
 	
-	private int cartNo;
-	private int bookNo;
-	private String userId;
-	private int productCount;
+	private int cartNo;	// 장바구니 PK
+	private int bookNo;	// 책 번호 (책 테이블의 PK)
+	private String userId; // 사용자 아이디
+	private int productCount;	// 장바구니 상품 수량
 	
 	private Book book;
 	
