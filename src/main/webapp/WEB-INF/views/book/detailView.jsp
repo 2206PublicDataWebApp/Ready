@@ -10,8 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서 세부 조회</title>
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<style >
@@ -289,72 +290,71 @@
 		})
 		
 		$("#insertCart-btn").click(function(){
-	         
-	         var login = "${principal }";
 
-	         if(login == "") {
-	            alert("로그인이 필요합니다");
-	            return false;
-	         }
-	         
-	         var bookNo = $("#bookNo").val();
-	         var productCount = $("#productCount").val();
-	         var num_check = /^[0-9]*$/;
-	         if(num_check.test(productCount)) {
-	        	 if(productCount > 99) {
-	        		 alert("99개 이상 주문할 수 없습니다.");
-	        		 return false;
-	        	 } else if(productCount == 0) {
-		     			alert ("1개 이상의 숫자를 입력해주세요");
-		    			countControl.focus();
-		    			return false;
-	         	} else {
-	        	 alert("숫자만 입력할 수 있습니다.");	 
-	         	}
-	         }
-	               
-	         $.ajax({
-	            url : "/cart/insert",
-	            type : "POST",
-	            data : {
-	               bookNo : bookNo,
-	               productCount : productCount
-	            },
-	            success : function(result) {
-	               if(result > 0){
-	                  var cartConfirm = confirm("장바구니에 추가되었습니다.\n 장바구니로 이동하시겠습니까?");
-	                  if(cartConfirm) {
-	                     location.href="/cart/cartView";
-	                  } else {
-	                     return false;
-	                  }
-	               } else if(result == 0) {
-	                  alert("장바구니에 이미 있는 상품입니다.");
-	               }
-	            }
-	         });
-	      })
+             var login = "${principal }";
+
+             if(login == "") {
+                alert("로그인이 필요합니다");
+                return false;
+             }
+
+             var bookNo = $("#bookNo").val();
+             var productCount = $("#productCount").val();
+             var num_check = /^[0-9]*$/;
+             if(num_check.test(productCount)) {
+                 if(productCount > 99) {
+                     alert("99개 이상 주문할 수 없습니다.");
+                     return false;
+                 } else if(productCount == 0){
+                     alert("1개 이상의 숫자를 입력해주세요.");
+                     return false;
+                 }
+             } else {
+                 alert("숫자만 입력할 수 있습니다.");
+             }
+
+             $.ajax({
+                url : "/cart/insert",
+                type : "POST",
+                data : {
+                   bookNo : bookNo,
+                   productCount : productCount
+                },
+                success : function(result) {
+                   if(result > 0){
+                      var cartConfirm = confirm("장바구니에 추가되었습니다.\n 장바구니로 이동하시겠습니까?");
+                      if(cartConfirm) {
+                         location.href="/cart/cartView";
+                      } else {
+                         window.location.reload(true);
+                      }
+                   } else if(result == 0) {
+                      alert("장바구니에 이미 있는 상품입니다.");
+                   }
+                }
+             });
+          })
 		
 		
 		
 		function order(bookNo) {
-	         var productCount = $("#productCount").val();
-	         var num_check = /^[0-9]*$/;
-	         if(num_check.test(productCount)) {
-	        	 if(productCount > 99) {
-	        		 alert("99개 이상 주문할 수 없습니다.");
-	        		 return false;
-	        	 } else if(productCount == 0) {
-	     			alert ("1개 이상의 숫자를 입력해주세요");
-	    			countControl.focus();
-	    			return false;
-	         	} else {
-	        	 alert("숫자만 입력할 수 있습니다.");	
-	        	 	return false;
-	         	}
-	         location.href="/order/directOrderView?bookNo="+bookNo+"&productCount="+productCount;
-	      	}
-		}
+             var productCount = $("#productCount").val();
+             var num_check = /^[0-9]*$/;
+
+             if(num_check.test(productCount)) {
+                 if(productCount > 99) {
+                     alert("99개 이상 주문할 수 없습니다.");
+                     return false;
+                 } else if(productCount == 0){
+                     alert("1개 이상의 숫자를 입력해주세요.");
+                     return false;
+                 }
+             } else {
+                 alert("숫자만 입력할 수 있습니다.");
+                     return false;
+             }
+             location.href="/order/directOrderView?bookNo="+bookNo+"&productCount="+productCount;
+          }bb
 
 	</script>
 	

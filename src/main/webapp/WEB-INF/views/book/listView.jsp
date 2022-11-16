@@ -9,8 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서 목록</title>
 	<style>
 		.page-title {
 			margin-left : 10%;

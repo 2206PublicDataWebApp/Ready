@@ -9,8 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지</title>
 	<style>
 		.table {
 		width : 30%;

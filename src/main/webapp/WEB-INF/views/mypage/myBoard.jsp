@@ -11,8 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내 게시글</title>
 	<style>
 		.page-title {
 		}

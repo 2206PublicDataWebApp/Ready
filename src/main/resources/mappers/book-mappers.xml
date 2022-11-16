@@ -103,6 +103,9 @@
 			<if test="category.toString() == '만화'">
 				BOOK_CATEGORY LIKE '%' ||#{category}|| '%'
 			</if>
+			<if test="category.toString() == 'study'">
+				BOOK_CATEGORY LIKE '%' || '고등' || '%' OR BOOK_CATEGORY LIKE '%' || '대학' || '%'
+			</if>
 		</where>
 	</select>
 	
@@ -138,6 +141,9 @@
 			</if>
 			<if test="category.toString() == '만화'">
 				BOOK_CATEGORY LIKE '%' ||'만화'|| '%'
+			</if>
+			<if test="category.toString() == 'study'">
+				BOOK_CATEGORY LIKE '%' || '고등' || '%' OR BOOK_CATEGORY LIKE '%' || '대학' || '%'
 			</if>
 		</where>
 		<if test="category.toString() == 'Best'">

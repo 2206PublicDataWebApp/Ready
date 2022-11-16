@@ -10,8 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <meta charset="UTF-8">
-<title>설문조사 페이지</title>
+<title>설문조사 등록</title>
 	<style>
 		.gender-img {
 			height : 150px;
@@ -190,7 +191,7 @@
 			</form>
 		</div>
 		
-		<div class="col-md-3">여기는 사이드바</div>
+		<div class="col-md-3"></div>
 	</div>
 	<div class="main-footer">
 		<jsp:include page="../main/footer.jsp"></jsp:include>

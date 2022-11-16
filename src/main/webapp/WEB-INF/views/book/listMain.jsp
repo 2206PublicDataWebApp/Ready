@@ -9,8 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>카테고리 도서목록</title>
 	<style>
 		.page-title {
 			margin-left : 10%;
@@ -72,7 +73,7 @@
 				<h3>Read'y 만화</h3>
 			</div>
 		</c:if>
-		<c:if test="${category eq 'Study'}">
+		<c:if test="${category eq 'study'}">
 			<div class="page-title">
 				<h3>Read'y 공부도서</h3>
 			</div>

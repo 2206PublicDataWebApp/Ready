@@ -11,8 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png"  href="/resources/images/favicon.ico"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내 후기</title>
 	<style>
 		.card-body > a {
 			color : black;
