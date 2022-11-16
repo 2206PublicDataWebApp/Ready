@@ -86,7 +86,7 @@
 									<a class="a-button" href="/que/myList.kh?page=${page}">리스트</a>
 								</c:if>
 								<c:if test="${que.qStatus ne 'F'}">
-									<a class="a-button" href="/que/manageList.kh?page=${page }">리스트</a>
+									<a class="a-button" href="/admin/manageList.kh?page=${page }">리스트</a>
 								</c:if>
 							</c:if>
 						</td>

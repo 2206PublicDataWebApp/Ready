@@ -26,6 +26,9 @@
          	color : white;
          	border-color : #804A15;
 		}
+		#textEmail {
+			width : 250px;
+		}
 	</style>
 	<jsp:include page="../main/header.jsp"></jsp:include>
 	<link rel="stylesheet" href="/resources/css/main/mainHeader.css">
@@ -43,7 +46,7 @@
 			<br><br>
 			<form action="/mypage/deleteUser.kh" method="post">
 				<input type="hidden" name="userEmail" value="${principal.user.userEmail }">
-				<input type="text" name="textEmail">
+				<input type="text" name="textEmail" id="textEmail">
 				<br><br>
 				<div class="btn-section">
 					<button type="submit" class="btn">회원 탈퇴</button>

@@ -62,8 +62,8 @@
 					</c:if>
 					<c:if test="${principal.user.userRole eq 'ROLE_ADMIN'}">
 						<button class="rvs-sig-btn rvs-sig-btn-lg"  onclick="location.href='/que/myList.kh'">FAQ 관리</button>
-						<button class="rvs-sig-btn rvs-sig-btn-lg" onclick="location.href='/que/manageList.kh'">문의글관리</button>
-						<button class="sig-btn sig-btn-lg" onclick="location.href='/que/viewWriteAdmin.kh'">FAQ 등록</button>
+						<button class="rvs-sig-btn rvs-sig-btn-lg" onclick="location.href='/admin/manageList.kh'">문의글관리</button>
+						<button class="sig-btn sig-btn-lg" onclick="location.href='/admin/viewWriteAdmin.kh'">FAQ 등록</button>
 					</c:if>
 			   </div>
 			</div>

@@ -235,7 +235,7 @@ public class QuestionController {
 	 * @param page
 	 * @return
 	 */
-	@RequestMapping(value="/que/manageList.kh", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/manageList.kh", method=RequestMethod.GET)
 	public ModelAndView viewManageList(
 			ModelAndView mv
 			, @RequestParam(value="page", required=false) Integer page) {
@@ -269,7 +269,7 @@ public class QuestionController {
 	}
 	
 	// FAQ 공지등록화면
-	@RequestMapping(value="/que/viewWriteAdmin.kh", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/viewWriteAdmin.kh", method=RequestMethod.GET)
 	public String showFAQWrite() {
 		return "que/FAQWriteForm";
 	}

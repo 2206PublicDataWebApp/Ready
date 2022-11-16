@@ -162,6 +162,7 @@
 			type : "post",
 			success : function(result){
 				alert("총 " + result + " 권이 삭제되었습니다.");
+				location.href="admin/admin-product";
 			},
 			error : function(result){
 				alert("에러 발생");
